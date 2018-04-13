@@ -48,7 +48,7 @@ public class SeqList {
 			Data[pos] = o;
 			length++;
 		}else
-			throw new Exception("∑«∑®≤Â»Î");
+			throw new Exception("invalid insert");
 	}
 	
 	//delete
