@@ -1,0 +1,99 @@
+public class SeqList {
+	private int length;//length of list
+	private Object[] Data;
+	
+	private int size = 10;//initial array size
+	
+	
+	SeqList(){
+		length = 0;
+		Data = new Object[size];
+	}
+
+	//change size
+	private void changeSize() {
+		if(size==length) {
+			size*=2;
+			Object[] newData = new Object[size];
+			for(int i=0;i<Data.length;i++) {
+				newData[i]=Data[i];
+			}
+			Data=newData;
+		}
+	}
+	
+	//get
+	public Object getElement(int pos) {
+		if (pos >= 0 && pos < length) {
+			return Data[pos];
+		}
+		else
+			return null;
+	}
+
+	//add
+	public void addElement(Object o) {
+		changeSize();
+		Data[length]=o;
+		length++;
+	}
+	
+	//insert
+	public void insertElement(int pos, Object o) throws Exception {
+		if (pos >= 0 && pos < length) {
+			changeSize();
+			for (int i = length; i >= pos; i--) {
+				Data[i] = Data[i - 1];
+			}
+			Data[pos] = o;
+			length++;
+		}else
+			throw new Exception("∑«∑®≤Â»Î");
+	}
+	
+	//delete
+	public void deleteElement(Object o) {
+		for(int i=0;i<length;i++) {
+			if(Data[i].equals(o)) {
+				for(int j=i;j<length;j++) {
+					Data[j]=Data[j+1];
+				}
+				length--;
+				break;
+			}
+		}
+	}
+	
+	public int getLength() {
+		return length;
+	}
+	
+	public void print() {
+		for(int i = 0;i<length;i++)
+			System.out.println(Data[i].toString());
+	}
+	
+	public static void main(String[] args) throws Exception {
+		SeqList list = new SeqList();
+		list.addElement(new Integer(0));
+		list.addElement(new Integer(2));
+		list.addElement(new Integer(5));
+		list.addElement(new Integer(2));
+		list.addElement(new Integer(3));
+		list.addElement(new Integer(0));
+		list.addElement(new Integer(2));
+		list.addElement(new Integer(5));
+		list.addElement(new Integer(2));
+		list.addElement(new Integer(3));
+		list.addElement(new Integer(0));
+		list.addElement(new Integer(2));
+		list.addElement(new Integer(5));
+		list.addElement(new Integer(2));
+		list.addElement(new Integer(3));
+		list.print();
+//		list.insertElement(2, 9);
+//		list.print();
+//		list.deleteElement(2);
+//		list.print();
+	}
+}
