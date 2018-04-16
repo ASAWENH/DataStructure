@@ -1,5 +1,3 @@
-package chapter2;
-
 public class SeqStack {
 	private Object[] Data;
 	private int top;// index of top
