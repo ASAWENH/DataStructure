@@ -1,0 +1,171 @@
+public class LinkedList {
+	private Node headNode;// head node
+	private int length;// length of the list
+
+	LinkedList() {
+		headNode = new Node();
+		length = 0;
+	}
+
+	// get
+	public Node getElement(int i) throws Exception {
+		// TODO Auto-generated method stub
+		Node n = null;
+		Node temp = headNode;
+		if (i > 0 && i <= length) {
+			for (int j = 0; j <= i; j++) {
+				if (j == i) {
+					n = temp;
+				} else {
+					temp = temp.getNext();
+				}
+			}
+		} else {
+			throw new Exception("Out Of Bounds");
+		}
+		return n;
+	}
+
+	// add
+	public void addElement(Object o) {
+		// TODO Auto-generated method stub
+		Node n = new Node(o, null);
+		Node temp = headNode;
+		while (temp.getNext() != null) {
+			temp = temp.getNext();
+		}
+		temp.setNext(n);
+		length++;
+	}
+
+	// insert
+	public void insertElement(int i, Object o) throws Exception {
+		// TODO Auto-generated method stub
+		Node n = new Node(o, null);
+		if (i >= 1 && i <= length) {
+			Node temp = headNode;
+			for (int j = 1; j <= i; j++) {
+				if (j == i) {
+					n.setNext(temp.getNext());
+					temp.setNext(n);
+					length++;
+				}
+				temp = temp.getNext();
+			}
+		} else if (i == length + 1) {
+			Node temp = headNode;
+			while (temp.getNext() != null) {
+				temp = temp.getNext();
+			}
+			temp.setNext(n);
+			length++;
+		} else {
+			throw new Exception("Invalid Insert");
+		}
+	}
+
+	// delete
+	public void deleteElement(Object o) {
+		// TODO Auto-generated method stub
+		Node temp = headNode;
+		int i = 1;
+		while (temp.getNext() != null) {
+			if (temp.getNext().getData().equals(o)) {
+				if (i >= 1 && i < length) {
+					temp.setNext(temp.getNext().getNext());
+				}
+				if (i == length) {
+					temp.setNext(null);
+				}
+				length--;
+				break;
+			}
+			temp = temp.getNext();
+			i++;
+		}
+	}
+
+	public int getLength() {
+		return length;
+	}
+
+	public Node getHeadNode() {
+		return headNode;
+	}
+	
+	public void print() {
+		// TODO Auto-generated method stub
+		Node temp = headNode;
+		int i = 1;
+		while (temp.getNext() != null) {
+			temp = temp.getNext();
+			System.out.println("[" + i + "," + temp.getData() + "]");
+			i++;
+		}
+	}
+
+	public static void main(String[] args) throws Exception {
+		LinkedList list = new LinkedList();
+		list.addElement(3);
+		list.addElement(5);
+		list.addElement(8);
+		list.addElement(5);
+
+		list.insertElement(2, 6);
+		list.insertElement(1, 0);
+		list.insertElement(list.length + 1, 9);
+
+		list.addElement(7);
+		list.addElement(3);
+
+		list.deleteElement(3);
+		list.deleteElement(5);
+		list.deleteElement(3);
+
+		list.print();
+
+		System.out.println("length: " + list.getLength());
+		
+		Node hn = list.getHeadNode();
+		Node n = hn;
+		
+		int i=1;
+		while(n.getNext()!=null) {
+			n = n.getNext();
+			System.out.println("["+i+","+n.getData()+"]");	
+			i++;
+		}
+	}
+}
+
+// Node
+class Node {
+	private Object Data;
+	private Node next;
+
+	Node() {
+		Data = null;
+		next = null;
+	}
+
+	Node(Object o, Node n) {
+		Data = o;
+		next = n;
+	}
+
+	public void setData(Object data) {
+		Data = data;
+	}
+
+	public Object getData() {
+		return Data;
+	}
+
+	public void setNext(Node next) {
+		this.next = next;
+	}
+
+	public Node getNext() {
+		return next;
+	}
+}
